@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MUSH - פרויקט שדרוג אפסל</title>
+    <style>
+        :root {
+            --bg-page: #F4F7F6;
+            --text-main: #2D3748;
+            --text-muted: #718096;
+            --accent-green: #38A169;
+            --card-bg: #FFFFFF;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Assistant, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-page);
+            color: var(--text-main);
+            line-height: 1.6;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .header h1 {
+            font-size: 32px;
+            color: var(--text-main);
+            margin-bottom: 15px;
+        }
+
+        .header p {
+            font-size: 18px;
+            color: var(--text-muted);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .links-grid {
+            display: grid;
+            gap: 20px;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 30px;
+            text-decoration: none;
+            color: inherit;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            border-right: 5px solid transparent;
+        }
+
+        .card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+
+        .card-1 { border-color: #E53E3E; } /* Red for Audit */
+        .card-2 { border-color: #D69E2E; } /* Gold for Strategy */
+        .card-3 { border-color: var(--accent-green); } /* Green for Final Upsell */
+
+        .card-content h2 {
+            font-size: 22px;
+            margin-bottom: 8px;
+        }
+
+        .card-content p {
+            font-size: 15px;
+            color: var(--text-muted);
+        }
+
+        .arrow {
+            font-size: 24px;
+            color: var(--text-muted);
+            margin-right: 20px;
+            transition: transform 0.2s;
+        }
+
+        .card:hover .arrow {
+            transform: translateX(-5px);
+            color: var(--text-main);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="header">
+            <h1>הצגת אסטרטגיה: שדרוג דף האפסל של MUSH</h1>
+            <p>ריכזנו עבורכם את כל שלבי המחקר, הניתוח והביצוע של דף האפסל החדש. המטרה שלנו ברורה: לפרוץ את תקרת ה-12% המרה הנוכחית באמצעות אסטרטגיית "המודל ההיברידי".</p>
+        </div>
+
+        <div class="links-grid">
+            
+            <a href="upsell-audit-claude.html" class="card card-1" target="_blank">
+                <div class="card-content">
+                    <h2>1. דו"ח הליקויים (UX/Copy Audit)</h2>
+                    <p>הניתוח הראשוני של הדף הקיים: זיהוי הבעיות המרכזיות שעוצרות את ההמרות, ניתוח החיכוך (Friction) ונקודות התורפה של ההצעה הנוכחית.</p>
+                </div>
+                <div class="arrow">←</div>
+            </a>
+
+            <a href="copywriters-cabinet-gemini.html" class="card card-2" target="_blank">
+                <div class="card-content">
+                    <h2>2. גיבוש האסטרטגיה (קבינט המומחים)</h2>
+                    <p>סיכום דיון האסטרטגיה המעמיק המשלב פסיכולוגיית מכירות מבוססת דיירקט-רספונס עם דאטה (CRO), וההחלטה על המעבר למכירה ויזואלית.</p>
+                </div>
+                <div class="arrow">←</div>
+            </a>
+
+            <a href="new-upsell.html" class="card card-3" target="_blank">
+                <div class="card-content">
+                    <h2>3. דף האפסל החדש (התוצר הסופי)</h2>
+                    <p>הגרסה הסופית והמיושמת. דף קצר, מהדק, מבוסס טיימליין ויזואלי לרוכשים רגשיים, עם אקורדיונים נפתחים לרוכשים אנליטיים (המודל ההיברידי).</p>
+                </div>
+                <div class="arrow">←</div>
+            </a>
+
+        </div>
+    </div>
+
+</body>
+</html>
