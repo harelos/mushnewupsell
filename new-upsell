@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MUSH - שדרוג VIP למזמינים</title>
+    <style>
+        :root {
+            --primary-bg: #FDFBF7;
+            --text-dark: #2C3E2D;
+            --text-gray: #5A6D5B;
+            --accent-green: #4A7C59;
+            --btn-orange: #E8830A;
+            --btn-orange-hover: #CC7308;
+            --warning-bg: #FFF3CD;
+            --warning-text: #856404;
+            --border-color: #E6E2D8;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, sans-serif; }
+        body { background-color: var(--primary-bg); color: var(--text-dark); line-height: 1.6; }
+        .container { max-width: 650px; margin: 0 auto; background: #fff; box-shadow: 0 0 20px rgba(0,0,0,0.05); padding-bottom: 40px; }
+
+        /* Warning Bar */
+        .warning-bar { background-color: var(--warning-bg); color: var(--warning-text); text-align: center; padding: 12px; font-size: 14px; font-weight: bold; border-bottom: 1px solid #FFEEBA; }
+
+        /* Hero */
+        .hero { padding: 30px 20px 20px; text-align: center; }
+        .pre-headline { color: var(--accent-green); font-weight: 600; font-size: 14px; margin-bottom: 10px; display: block; }
+        h1 { font-size: 26px; line-height: 1.3; margin-bottom: 15px; color: var(--text-dark); }
+        .sub-headline { font-size: 16px; color: var(--text-gray); margin-bottom: 25px; }
+        .product-image-placeholder { background: #f0eae1; border-radius: 12px; height: 250px; display: flex; align-items: center; justify-content: center; margin-bottom: 25px; border: 1px dashed #ccc; color: #888; font-weight: bold; }
+
+        /* Pricing & CTA */
+        .pricing-box { background: #F8F9FA; border-radius: 12px; padding: 20px; margin-bottom: 15px; border: 2px solid var(--accent-green); }
+        .price-strike { text-decoration: line-through; color: #999; font-size: 16px; }
+        .price-new { font-size: 24px; font-weight: bold; color: var(--text-dark); margin: 5px 0 15px; }
+        
+        .cta-btn { display: block; background-color: var(--btn-orange); color: white; text-decoration: none; padding: 16px 20px; border-radius: 8px; font-size: 18px; font-weight: bold; text-align: center; transition: background 0.3s ease; box-shadow: 0 4px 15px rgba(232, 131, 10, 0.3); }
+        .cta-btn:hover { background-color: var(--btn-orange-hover); }
+        .cta-subtext { font-size: 13px; color: var(--text-gray); margin-top: 8px; display: block; font-weight: 500; }
+        
+        .decline-link { display: block; text-align: center; margin-top: 15px; color: #A0AAB2; text-decoration: none; font-size: 14px; transition: color 0.2s; }
+        .decline-link:hover { color: #666; text-decoration: underline; }
+
+        /* Testimonial */
+        .testimonial { background: var(--primary-bg); padding: 20px; margin: 30px 20px; border-right: 4px solid var(--btn-orange); border-radius: 8px 0 0 8px; font-style: italic; color: var(--text-gray); }
+        .stars { color: #FFD700; margin-bottom: 10px; font-size: 18px; }
+        .author { font-weight: bold; font-style: normal; margin-top: 10px; color: var(--text-dark); font-size: 14px; }
+
+        /* 24/7 Timeline */
+        .routine-section { padding: 20px; }
+        .routine-section h2 { font-size: 22px; text-align: center; margin-bottom: 25px; }
+        .timeline { position: relative; padding-right: 30px; }
+        .timeline::before { content: ''; position: absolute; right: 9px; top: 0; height: 100%; width: 2px; background: #E0E0E0; }
+        .timeline-item { position: relative; margin-bottom: 25px; }
+        .timeline-icon { position: absolute; right: -30px; background: #fff; border: 2px solid var(--accent-green); width: 20px; height: 20px; border-radius: 50%; top: 5px; }
+        .timeline-time { font-weight: bold; color: var(--accent-green); font-size: 16px; margin-bottom: 5px; }
+        .timeline-content { background: #F8F9FA; padding: 15px; border-radius: 8px; font-size: 15px; color: var(--text-gray); }
+        .timeline-content strong { color: var(--text-dark); }
+
+        /* Analytical Accordion */
+        .accordion-section { padding: 10px 20px 30px; }
+        .accordion-title { font-size: 18px; text-align: center; margin-bottom: 15px; color: var(--text-dark); }
+        .accordion-item { border: 1px solid var(--border-color); border-radius: 8px; margin-bottom: 10px; background: #fff; overflow: hidden; }
+        .accordion-header { padding: 15px; display: flex; justify-content: space-between; align-items: center; cursor: pointer; font-weight: bold; font-size: 15px; color: var(--accent-green); background: #fdfdfd; }
+        .accordion-header:hover { background: #f9f9f9; }
+        .accordion-icon { font-size: 18px; transition: transform 0.3s ease; }
+        .accordion-content { padding: 0 15px; max-height: 0; overflow: hidden; transition: max-height 0.3s ease, padding 0.3s ease; font-size: 14px; color: var(--text-gray); }
+        .accordion-item.active .accordion-content { padding: 15px; max-height: 300px; border-top: 1px solid var(--border-color); }
+        .accordion-item.active .accordion-icon { transform: rotate(45deg); }
+
+        /* Guarantee */
+        .guarantee { background: #F0F7F2; padding: 25px 20px; text-align: center; margin: 10px 20px 30px; border-radius: 12px; border: 1px solid #C3E0CB; }
+        .guarantee h3 { color: var(--accent-green); margin-bottom: 10px; font-size: 18px; }
+        .guarantee p { font-size: 14px; color: var(--text-gray); }
+
+        .bottom-cta-wrapper { padding: 0 20px; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="warning-bar">
+        ⚠️ הזמנתך מאושרת! אנא אל תסגרו את הדף כדי למנוע חיוב כפול.
+    </div>
+
+    <div class="hero">
+        <span class="pre-headline">רגע לפני שמסיימים...</span>
+        <h1>עשיתם צעד ענק עם MUSH. אל תשאירו את הגוף שלכם בחצי הדרך.</h1>
+        <p class="sub-headline">לזמן מוגבל: שדרגו לשגרת ה-VIP המלאה וקבלו אנרגיה בצהריים, עיכול רגוע בערב, ושינה עמוקה בלילה - ב-50% הנחה.</p>
+        
+        <div class="product-image-placeholder">
+            [תמונת Flat Lay מפתה של כל הסט כאן]
+        </div>
+
+        <div class="pricing-box">
+            <div class="price-strike">במקום 499 ₪</div>
+            <div class="price-new">רק 299 ₪ עבורכם (חיסכון של 200 ₪)</div>
+            
+            <a href="#" class="cta-btn">👉 כן! שדרגו לי את ההזמנה לשגרה המלאה</a>
+            <span class="cta-subtext">מצטרף להזמנה הקיימת שלך בלחיצת כפתור (ללא חיוב משלוח כפול)</span>
+        </div>
+        
+        <a href="#" class="decline-link">לא תודה, אני אסתפק ב-MUSH בלבד כרגע.</a>
+    </div>
+
+    <div class="testimonial">
+        <div class="stars">★★★★★</div>
+        "מאז שהוספתי את החבילה המלאה, אני קמה בבוקר רעננה הרבה יותר, והבטן סוף סוף רגועה בלי נפיחות. זה שינה לי את היום וגם את הלילה."
+        <div class="author">- עדי ש. (קנייה מאומתת)</div>
+    </div>
+
+    <div class="routine-section">
+        <h2>ככה נראה יום עם שגרת ה-VIP:</h2>
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="timeline-icon"></div>
+                <div class="timeline-time">☀️ 08:00 בבוקר</div>
+                <div class="timeline-content">
+                    <strong>MUSH (כבר בהזמנה):</strong> מתחילים את היום עם פוקוס חד ואנרגיה יציבה.
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-icon"></div>
+                <div class="timeline-time">⚡ 14:00 בצהריים</div>
+                <div class="timeline-content">
+                    <strong>Matcha Mushroom:</strong> שייק מאצ'ה מחזק שמונע את צלילת האנרגיה והעייפות של הצהריים.
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-icon"></div>
+                <div class="timeline-time">🌿 18:00 בערב</div>
+                <div class="timeline-content">
+                    <strong>Chicory Mushroom:</strong> קפה עולש שמרגיע את מערכת העיכול ומעלים נפיחות אחרי ארוחות.
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-icon"></div>
+                <div class="timeline-time">🌙 22:00 בלילה</div>
+                <div class="timeline-content">
+                    <strong>Cocoa Mushroom:</strong> קקאו מרגיע שמשחרר מתח ומכין את הגוף לשינה עמוקה ורציפה עד הבוקר.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="accordion-section">
+        <h3 class="accordion-title">מה בדיוק כוללת חבילת ה-VIP? <br><span style="font-size: 14px; font-weight: normal; color: #888;">(לחצו לפירוט הרכיבים)</span></h3>
+        
+        <div class="accordion-item">
+            <div class="accordion-header" onclick="toggleAccordion(this)">
+                <span>🍵 Mushroom Matcha</span>
+                <span class="accordion-icon">+</span>
+            </div>
+            <div class="accordion-content">
+                העלים האיכותיים ביותר של מאצ'ה בטקס יפני מתחברים לבלנד של 6 פטריות אדפטוגניות, ויוצרים משקה ירוק עוצמתי שמחזק את מערכת החיסון בעונת החורף, משפר ריכוז ובהירות מחשבתית ומעניק אנרגיה נקייה לאורך היום.
+            </div>
+        </div>
+
+        <div class="accordion-item">
+            <div class="accordion-header" onclick="toggleAccordion(this)">
+                <span>☕ Mushroom Chicory</span>
+                <span class="accordion-icon">+</span>
+            </div>
+            <div class="accordion-content">
+                משקה עולש אדפטוגני שנבנה במיוחד להרגעת מערכת העיכול. שילוב של שורש עולש עשיר בסיבים פרה-ביוטיים ופטריות אדפטוגניות שמרגיעות את הבטן, מפחיתות נפיחות וחומציות ותומכות בתנועתיות טבעית.
+            </div>
+        </div>
+
+        <div class="accordion-item">
+            <div class="accordion-header" onclick="toggleAccordion(this)">
+                <span>🍫 Mushroom Cocoa</span>
+                <span class="accordion-icon">+</span>
+            </div>
+            <div class="accordion-content">
+                קקאו לילה ללא סוכר וקפאין. שילוב של קקאו טבעי, מלוטונין, גליצין, L-Theanine ופטריות אדפטוגניות שמרגיעות את מערכת העצבים, מסייעות להירדמות מהירה ומעמיקות את איכות השינה לאורך כל הלילה.
+            </div>
+        </div>
+    </div>
+
+    <div class="guarantee">
+        <h3>🛡️ 100% אחריות ל-90 יום!</h3>
+        <p>אנחנו כל כך בטוחים שתתאהבו בשגרה החדשה, שאם לא תרגישו שינוי דרמטי באנרגיה, בעיכול ובשינה - תוכלו לקבל החזר כספי מלא תוך 90 ימים, ללא שאלות. האתגר עלינו.</p>
+    </div>
+
+    <div class="bottom-cta-wrapper">
+        <a href="#" class="cta-btn">👉 הוסף את השדרוג להזמנה שלי (299₪ בלבד)</a>
+        <a href="#" class="decline-link" style="margin-bottom: 20px;">לא, אוותר על ההנחה ואמשיך עם ההזמנה המקורית.</a>
+    </div>
+
+</div>
+
+<script>
+    function toggleAccordion(header) {
+        const item = header.parentElement;
+        const isActive = item.classList.contains('active');
+        
+        // Close all other accordions
+        document.querySelectorAll('.accordion-item').forEach(acc => {
+            acc.classList.remove('active');
+        });
+
+        // Toggle the clicked one
+        if (!isActive) {
+            item.classList.add('active');
+        }
+    }
+</script>
+
+</body>
+</html>
